@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="browse">
+    <div class="left3">
+        <div class="search">
+            <input type="text" name="name" placeholder="Enter a chair,shirt...">
+            <button class="btn btn-success">Search</button>
+        </div>
+        <div class="cat">
+            <h4>Categories</h4>
+            {% for categ in categories %}
+            <a href="{% url 'browse_category' categ.id %}">{{ categ.category }}</a>
+            {% endfor %}
+        </div>
+            
+
+        <div class="filter">
+            <h5>Clear filters</h5>
+            <a href="{% url 'browse_items' %}" class="btn btn-warning clear">Clear</a>
+        </div>
+
+    </div>
+
+    <div class="right3">
+        <div class="container row gap-3 flex">
+            {% for item in items %}
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'single_item' item.id %}"><img src="{{ item.photo.url }}" class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <p class="card-text">{{ item.price }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
